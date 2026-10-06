@@ -13,7 +13,7 @@ export async function guardarUsuario(usuario) {
     }
 }
 
-export async function listarUsuario() {
+export async function listarUsuarios() {
     try {
         const respuesta = await clienteApi.get(RUTA)
         return respuesta.data

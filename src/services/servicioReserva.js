@@ -13,7 +13,7 @@ export async function guardarEspacio(reserva) {
     }
 }
 
-export async function listarReserva() {
+export async function listarReservas() {
     try {
         const respuesta = await clienteApi.get(RUTA)
         return respuesta.data

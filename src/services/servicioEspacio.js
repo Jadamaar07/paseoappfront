@@ -23,7 +23,7 @@ export async function listarEspacio() {
     }
 }
 
-export async function modificarEspacio(id, espacio) {
+export async function modificarEspacios(id, espacio) {
     try {
         const respuesta = await clienteApi.put(RUTA + '/' + espacio, id)
         return respuesta.data

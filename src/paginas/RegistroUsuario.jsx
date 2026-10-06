@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PanelFormulario from '../componentes/PanelFormulario'
 
+import { guardarUsuario } from '../services/servicioUsuario'
+
 const IMAGEN = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&q=80'
 
 function RegistroUsuario() {
@@ -36,16 +38,34 @@ function RegistroUsuario() {
     }
     return nuevosErrores
   }
-
-  const manejarEnvio = (evento) => {
+  //Funcion para activar el API y enviarle datos
+  async function manejarEnvio(evento) {
+    //Evito que se recargue el formulario
     evento.preventDefault()
-    const nuevosErrores = validar()
-    setErrores(nuevosErrores)
-    if (Object.keys(nuevosErrores).length === 0) {
-      console.log('Usuario registrado:', usuario)
-      navegar('/home')
+    //Valido formulario
+    const nuevoErrores=validar()
+    if (Object.key(nuevosErrores).length>0) {
+      return null
+    }
+
+    //todo ok voy a intentar enviar los datos al API 
+    try {
+      const usuarioGuardado = await guardarUsuario(usuario)
+      navegar(('/home'))
+    } catch{
+      setErrores("No fue posible registrar el usuario") //Como hago para mostrar el error que manda el API (Tarea)
     }
   }
+  
+//  const manejarEnvio = (evento) => {
+//    evento.preventDefault()
+//    const nuevosErrores = validar()
+//    setErrores(nuevosErrores)
+//    if (Object.keys(nuevosErrores).length === 0) {
+//      console.log('Usuario registrado:', usuario)
+//      navegar('/home')
+//    }
+//  }
 
   return (
     <PanelFormulario
