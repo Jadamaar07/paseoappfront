@@ -33,7 +33,7 @@ export async function modificarReserva(id, reserva) {
     }
 }
 
-export async function eliminarEspacio(id) {
+export async function eliminarReserva(id) {
     try {
         const respuesta = await clienteApi.delete(RUTA + '/' + id)
         throw respuesta
